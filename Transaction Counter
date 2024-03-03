@@ -1,0 +1,20 @@
+import csv
+
+def count_transactions(csv_file):
+    transaction_count = {}
+    with open(csv_file, 'r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            transaction_id = row['Transaction ID']
+            if transaction_id in transaction_count:
+                transaction_count[transaction_id] += 1
+            else:
+                transaction_count[transaction_id] = 1
+    return transaction_count
+
+if __name__ == "__main__":
+    csv_file = 'transactions.csv'  # Change to the path of your transaction data CSV file
+    transactions = count_transactions(csv_file)
+    print("Transaction Counts:")
+    for transaction_id, count in transactions.items():
+        print(f"Transaction ID: {transaction_id}, Count: {count}")
